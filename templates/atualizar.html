@@ -7,14 +7,17 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-<header>
+    <header>
         <h1>Biblioteca</h1>
         <nav>
             <a href="{{ url_for('index') }}">Home</a>
             <a href="{{ url_for('novo') }}">Adicionar Livro</a>
             <a href="{{ url_for('novo_user') }}">Cadastrar-se</a>
         </nav>
-{% with messages = get_flashed_messages(with_categories=true) %}
+    </header>
+    <main>
+        <h2>Lista de Livros</h2>
+        {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 <div class="flash-messages">
                     {% for category, message in messages %}
@@ -23,10 +26,6 @@
                 </div>
             {% endif %}
         {% endwith %}
-
-    </header>
-    <main>
-        <h2>Lista de Livros</h2>
         <table>
             <thead>
                 <tr>
@@ -34,6 +33,7 @@
                     <th>Título</th>
                     <th>Autor</th>
                     <th>Ano de Publicação</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,9 +45,9 @@
                     <td>{{ livro[3] }}</td>
                     <td>
                         <a href="{{ url_for('editar', id=livro[0]) }}">Editar</a>
-                    </td>
-                    <td>
-                        <a href="{{ url_for('deletar', id=livro[0]) }}">Deletar</a>
+                        <form action="{{ url_for('deletar', id=livro[0]) }}" method="post" style="display:inline;">
+                            <button type="submit">Deletar</button>
+                        </form>
                     </td>
                 </tr>
                 {% endfor %}
