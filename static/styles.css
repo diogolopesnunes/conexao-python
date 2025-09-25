@@ -1,37 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+/* --- Reset e Estilos Base --- */
 * {
-    font-family: "Comic Sans MS";
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    text-decoration: none;
 }
 
-header {
+body {
+    /* Centraliza o conteúdo principal (form) se ele não for 100% de largura */
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 100;
-    height: 60px;
-    box-shadow: 0 2px 5px gray;
+    flex-direction: column;
+    align-items: center; /* Centraliza o <main> e o <h2> dentro do <body> */
+}
+
+/* --- Estilos do Cabeçalho e Navegação --- */
+header {
+    width: 100%; /* Ocupa a largura total */
+    display: flex; /* Habilita o flexbox */
+    justify-content: space-between; /* Distribui o título e a navegação */
+    align-items: flex-start; /* Alinha os itens ao topo */
+    padding: 20px 30px; /* Padding interno, substitui a margem do <h1> e nav */
+}
+
+h1 {
+    /* Não precisa de margin se o header tem padding */
+    margin: 0;
 }
 
 header nav {
     display: flex;
-    padding-right: 1em;
-    gap: 1.5rem; /* espaço entre links */
-    flex-wrap: wrap; /* evita que links saiam do header */
-}
-
-td {
-    background-color: lightgrey;
-    padding: 10px;
-}
-
-a {
-    text-decoration: none;
-    color: black;
+    gap: 1.5rem;
+    flex-flow: row wrap; /* Alinha links em linha e quebra se necessário */
+    margin: 0;
+    /* Remove 'position: absolute' para que a navegação participe do layout */
 }
 
 header a {
     text-decoration: none;
+    color: black;
+}
+
+/* --- Estilos de Mensagens Flash (Melhorado) --- */
+.flash-messages {
+    /* Mantido o posicionamento absolute para sobrepor o header,
+       mas centralizado de forma mais clara */
+    position: absolute;
+    top: 65px; /* Ajusta para aparecer abaixo do header */
+    left: 50%;
+    transform: translateX(-50%); /* Técnica para centralizar o bloco */
+
+    /* Estilização */
+    display: inline-block; /* Faz o bloco se ajustar ao conteúdo */
+    width: auto; /* Garante que a largura se ajustará ao conteúdo */
+    padding: 5px 20px; /* Padding ajustado */
+    margin: 0;
+
+    background-color: firebrick; /* Adicionado background, estava faltando */
+    color: white; /* Cor do texto alterada para contraste no fundo firebrick */
+    border-radius: 100px;
+    text-align: center;
+    /* text-decoration: shadow; foi removido, use text-shadow se quiser sombra */
+}
+
+.flash {
+    /* Remove qualquer estilo extra que venha com {{ category }} */
+    margin: 0;
+    padding: 0;
+}
+
+/* --- Estilos de Formulário e Main --- */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza h2 e form horizontalmente */
+    width: 100%;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 30px; /* Espaço após o header/flash message */
+    margin-bottom: 20px;
+}
+
+/* --- Estilos de Formulário e Main --- */
+form {
+    display: flex;
+    flex-flow: column;
+    width: 90%;
+    max-width: 20em;
+    gap: 15px; /* Aumentei o espaçamento para uma estética mais limpa */
+    margin-top: 20px;
+}
+
+input, button {
+    border: 1px solid black;
+    border-radius: 100px;
+    padding: 10px 20px;
+    background: white;
+    box-shadow: none; /* Remove a sombra para um visual mais limpo */
+    font-size: 1rem;
+    color: black;
+    transition: all 0.2s ease-in-out; /* Adiciona uma transição suave para efeitos de hover */
+}
+
+input:focus {
+    outline: none;
+    border: 1px solid #444; /* Borda um pouco mais escura ao focar */
+}
+
+button {
+    font-weight: bold;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+}
+
+button:hover {
+    background-color: #334;
+    color: white;
+}
+
+/* Estilo para o link "Cancelar" dentro do form */
+form a {
+    text-align: center;
+    margin-top: 5px;
+    color: black;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+}
+
+form a:hover {
+    color: firebrick; /* A cor muda sutilmente ao passar o mouse */
+}
+
+/* Estilo para o link "Cancelar" dentro do form */
+form a {
+    text-align: center;
+    margin-top: 5px;
+    color: red;
+    font-weight: bold;
+}
+
+/* --- Estilos de Tabela --- */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+thead tr {
+    background-color: black;
+    color: white;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+    background-color: ghostwhite;
 }
 
 td a {
     font-weight: bold;
+    color: black;
+}
+
+.acoes  {
+    display: flex;
+    flex-flow: column;
+    gap: 7px;
+}
+
+.custom-file-button {
+    width: 100%;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    border-radius: 100px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.custom-file-button:hover {
+    background-color: #334;
+}
+
+/* Esconde o input de arquivo padrão, como nas soluções anteriores */
+.file-input-container input[type="file"] {
+    display: none;
 }

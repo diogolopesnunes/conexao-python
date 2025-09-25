@@ -8,23 +8,30 @@
 </head>
 <body>
 <header>
-        <h1>Biblioteca</h1>
-        <nav>
-            <a href="{{ url_for('index') }}">Home</a>
-            <a href="{{ url_for('novo') }}">Adicionar Livro</a>
-            <a href="{{ url_for('novo_user') }}">Cadastrar-se</a>
-        </nav>
-{% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                <div class="flash-messages">
-                    {% for category, message in messages %}
-                        <div class="flash {{ category }}">{{ message }}</div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        {% endwith %}
+    <h1>Biblioteca</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="flash {{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
 
-    </header>
+    <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('novo') }}">Adicionar Livro</a>
+        {% if "id_usuario" in session: %}
+        <a href="{{ url_for('perfil') }}">Perfil</a>
+        <a href="{{ url_for('logout') }}">Deslogar</a>
+        {% else %}
+        <a href="{{ url_for('login') }}">Logar</a>
+        {% endif %}
+        <a href="{{ url_for('user') }}">Cadastrar</a>
+    </nav>
+
+</header>
     <main>
         <h2>Lista de Livros</h2>
         <table>
@@ -34,6 +41,7 @@
                     <th>Título</th>
                     <th>Autor</th>
                     <th>Ano de Publicação</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,10 +51,8 @@
                     <td>{{ livro[1] }}</td>
                     <td>{{ livro[2] }}</td>
                     <td>{{ livro[3] }}</td>
-                    <td>
+                    <td class="acoes">
                         <a href="{{ url_for('editar', id=livro[0]) }}">Editar</a>
-                    </td>
-                    <td>
                         <a href="{{ url_for('deletar', id=livro[0]) }}">Deletar</a>
                     </td>
                 </tr>
